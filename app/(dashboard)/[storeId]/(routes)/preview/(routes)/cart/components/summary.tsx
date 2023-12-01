@@ -20,6 +20,9 @@ const Summary = () => {
   }, 0);
 
   const onCheckout = async () => {
+    if (items.length === 0) {
+      return toast.info("No items in cart");
+    }
     setLoading(true);
     const response = await axios.post(`/api/${params.storeId}/checkout`, {
       productIds: items.map((item) => item.id),
