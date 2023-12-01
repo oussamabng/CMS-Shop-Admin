@@ -5,7 +5,7 @@ import { Store } from "@prisma/client";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Trash } from "lucide-react";
+import { StoreIcon, Trash } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
@@ -88,15 +88,29 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
       />
       <div className="flex items-center justify-between">
         <Heading title="Settings" description="Manage store preferences" />
-        <Button
-          variant="destructive"
-          size="icon"
-          onClick={() => {
-            setOpen(true);
-          }}
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
+        <div className="flex space-x-4 items-center">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              router.push(`/${params.storeId}/preview`);
+              router.refresh();
+            }}
+          >
+            <StoreIcon className="h-4 w-4 mr-2" />
+            Preview
+          </Button>
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <Trash className="h-4 w-4 mr-2" />
+            Delete
+          </Button>
+        </div>
       </div>
       <Separator />
       <Form {...form}>

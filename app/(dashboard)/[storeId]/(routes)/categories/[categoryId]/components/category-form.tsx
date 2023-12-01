@@ -49,7 +49,6 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
   initialData,
   billboards,
 }) => {
-  const origin = useOrigin();
   const params = useParams();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -70,7 +69,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
       setLoading(true);
       if (initialData) {
         await axios.patch(
-          `/api/${params.storeId}/categories/${params.billboardId}`,
+          `/api/${params.storeId}/categories/${params.categoryId}`,
           values
         );
       } else {
@@ -91,7 +90,7 @@ export const CategoryForm: React.FC<CategoryFormProps> = ({
     try {
       setLoading(true);
       await axios.delete(
-        `/api/${params.storeId}/categories/${params.billboardId}`
+        `/api/${params.storeId}/categories/${params.categoryId}`
       );
       router.push(`/${params.storeId}/categories`);
       router.refresh();
