@@ -19,7 +19,6 @@ export async function POST(
   req: Request,
   { params }: { params: { storeId: string } }
 ) {
-  console.log("POSTED");
   const { productIds } = await req.json();
 
   if (!productIds || productIds.length === 0) {
@@ -34,6 +33,9 @@ export async function POST(
         in: productIds,
       },
     },
+    include: {
+      images: true,
+    },
   });
 
   //@ts-ignore
@@ -46,6 +48,7 @@ export async function POST(
         currency: "USD",
         product_data: {
           name: product.name,
+          images: [product.images[0].url],
         },
         unit_amount: product.price.toNumber() * 100,
       },

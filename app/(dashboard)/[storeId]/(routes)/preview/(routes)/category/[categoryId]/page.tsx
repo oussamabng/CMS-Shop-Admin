@@ -34,7 +34,7 @@ const Category: React.FC<CategoryProps> = async ({ params, searchParams }) => {
   const category = await getCategory(params.storeId, params.categoryId);
 
   return (
-    <div className="bg-white">
+    <div className="bg-background">
       <Container>
         <Billboard data={category.billboard} />
         <div className="px-4 sm:px-6 lg:px-8 pb-24">
